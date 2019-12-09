@@ -15,7 +15,7 @@ const Speakers = ({}) => {
 
   useEffect(() => {
     setIsLoading(true);
-    newPromise(function(resolve) {
+    new Promise(function(resolve) {
       setTimeout(function() {
         resolve();
       }, 1000);
