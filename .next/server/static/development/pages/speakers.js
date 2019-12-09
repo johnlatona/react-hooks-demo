@@ -1897,11 +1897,12 @@ const speakers = () => {
 /*!********************!*\
   !*** ./src/App.js ***!
   \********************/
-/*! exports provided: default */
+/*! exports provided: ConfigContext, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigContext", function() { return ConfigContext; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ "./src/Home.js");
@@ -1911,41 +1912,54 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+const ConfigContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
 
 const pageToShow = pageName => {
   if (pageName === 'Home') return __jsx(_Home__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 8
     },
     __self: undefined
   });
   if (pageName === 'Speakers') return __jsx(_Speakers__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 9
     },
     __self: undefined
   });
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 10
     },
     __self: undefined
   }, "Not Found");
 };
 
+const configValue = {
+  showSpeakerSpeakingDays: true,
+  showSignMeUp: true
+};
+
 const App = ({
   pageName
 }) => {
-  return __jsx("div", {
+  return __jsx(ConfigContext.Provider, {
+    value: configValue,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 20
     },
     __self: undefined
-  }, pageToShow(pageName));
+  }, __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: undefined
+  }, pageToShow(pageName)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -2319,9 +2333,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "react-toastify");
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./App */ "./src/App.js");
 
 var _jsxFileName = "/Users/u089981/Documents/react/react-hooks-demo/src/SignMeUp.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
+
 
 
 
@@ -2344,6 +2360,7 @@ const SignMeUp = ({
     0: sendProcessing,
     1: setSendProcessing
   } = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false);
+  const context = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_App__WEBPACK_IMPORTED_MODULE_4__["ConfigContext"]);
 
   const validateEmail = email => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -2370,30 +2387,30 @@ const SignMeUp = ({
   };
 
   const buttonText = sendProcessing ? "processing..." : "Get Updates";
-  return __jsx("div", {
+  return context.showSignMeUp === false ? null : __jsx("div", {
     className: "container",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 45
     },
     __self: undefined
   }, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 46
     },
     __self: undefined
   }, __jsx(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 47
     },
     __self: undefined
   }), __jsx("div", {
     className: "content",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 48
     },
     __self: undefined
   }, __jsx("input", {
@@ -2409,7 +2426,7 @@ const SignMeUp = ({
     required: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 49
     },
     __self: undefined
   }), "\xA0", __jsx("button", {
@@ -2419,7 +2436,7 @@ const SignMeUp = ({
     type: "submit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 62
     },
     __self: undefined
   }, buttonText))));
@@ -2483,8 +2500,7 @@ var _jsxFileName = "/Users/u089981/Documents/react/react-hooks-demo/src/SpeakerD
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-
-const SpeakerDetail = ({
+const SpeakerDetail = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(({
   id,
   firstName,
   lastName,
@@ -2492,11 +2508,12 @@ const SpeakerDetail = ({
   bio,
   onHeartFavoriteHandler
 }) => {
+  console.log(`SpeakerDetail:${id} ${firstName} ${lastName} ${favorite}`);
   return __jsx("div", {
     className: "card col-4 cardmin",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 5
+      lineNumber: 6
     },
     __self: undefined
   }, __jsx(_ImageToggleOnScroll__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -2506,21 +2523,21 @@ const SpeakerDetail = ({
     alt: "{firstName} {lastName}",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 7
     },
     __self: undefined
   }), __jsx("div", {
     className: "card-body",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 13
     },
     __self: undefined
   }, __jsx("h4", {
     className: "card-title",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
     },
     __self: undefined
   }, __jsx("button", {
@@ -2531,24 +2548,23 @@ const SpeakerDetail = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 15
     },
     __self: undefined
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 22
     },
     __self: undefined
   }, firstName, " ", lastName)), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 26
     },
     __self: undefined
   }, bio)));
-};
-
+});
 /* harmony default export */ __webpack_exports__["default"] = (SpeakerDetail);
 
 /***/ }),
@@ -2576,10 +2592,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_Menu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../src/Menu */ "./src/Menu.js");
 /* harmony import */ var _SpeakerData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SpeakerData */ "./src/SpeakerData.js");
 /* harmony import */ var _SpeakerDetail__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SpeakerDetail */ "./src/SpeakerDetail.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./App */ "./src/App.js");
+/* harmony import */ var _speakersReducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./speakersReducer */ "./src/speakersReducer.js");
 
 
 var _jsxFileName = "/Users/u089981/Documents/react/react-hooks-demo/src/Speakers.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
+
 
 
 
@@ -2596,15 +2616,17 @@ const Speakers = ({}) => {
   const {
     0: speakingSunday,
     1: setSpeakingSunday
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true); // const [speakerList, setSpeakerList] = useState([]);
+
   const {
     0: speakerList,
-    1: setSpeakerList
-  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]);
+    1: dispatch
+  } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useReducer"])(_speakersReducer__WEBPACK_IMPORTED_MODULE_10__["default"], []);
   const {
     0: isLoading,
     1: setIsLoading
   } = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true);
+  const context = Object(react__WEBPACK_IMPORTED_MODULE_2__["useContext"])(_App__WEBPACK_IMPORTED_MODULE_9__["ConfigContext"]);
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(() => {
     setIsLoading(true);
     new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_1___default.a(function (resolve) {
@@ -2619,26 +2641,24 @@ const Speakers = ({}) => {
       }) => {
         return speakingSaturday && sat || speakingSunday && sun;
       });
-      setSpeakerList(speakerListServerFilter);
+      dispatch({
+        type: "setSpeakerList",
+        data: speakerListServerFilter
+      });
     });
     return () => {
       console.log("clean up");
     };
   }, []);
-  const speakerListFiltered = isLoading ? [] : speakerList.filter(({
+  const newSpeakerList = Object(react__WEBPACK_IMPORTED_MODULE_2__["useMemo"])(() => speakerList.filter(({
     sat,
     sun
   }) => speakingSaturday && sat || speakingSunday && sun).sort(function (a, b) {
-    if (a.firstName < b.firstName) {
-      return -1;
-    }
-
-    if (a.firstName > b.firstName) {
-      return 1;
-    }
-
+    if (a.firstName < b.firstName) return -1;
+    if (a.firstName > b.firstName) return 1;
     return 0;
-  });
+  }), [speakingSaturday, speakingSunday, speakerList]);
+  const speakerListFiltered = isLoading ? [] : newSpeakerList;
 
   const handleChangeSaturday = () => {
     setSpeakingSaturday(!speakingSaturday);
@@ -2648,72 +2668,74 @@ const Speakers = ({}) => {
     setSpeakingSunday(!speakingSunday);
   };
 
-  const heartFavoriteHandler = (e, favoriteValue) => {
+  const heartFavoriteHandler = Object(react__WEBPACK_IMPORTED_MODULE_2__["useCallback"])((e, favoriteValue) => {
     e.preventDefault();
 
     const sessionId = _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(e.target.attributes["data-sessionid"].value);
 
-    setSpeakerList(speakerList.map(item => {
-      if (item.id === sessionId) {
-        item.favorite = favoriteValue;
-        return item;
-      }
-
-      return item;
-    }));
-  };
-
+    dispatch({
+      type: favoriteValue ? "favorite" : "unfavorite",
+      sessionId
+    });
+  }, []);
   if (isLoading) return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 74
     },
     __self: undefined
   }, "Loading...");
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 77
     },
     __self: undefined
   }, __jsx(_src_Header__WEBPACK_IMPORTED_MODULE_5__["Header"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 78
     },
     __self: undefined
   }), __jsx(_src_Menu__WEBPACK_IMPORTED_MODULE_6__["Menu"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 79
     },
     __self: undefined
   }), __jsx("div", {
     className: "container",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 80
     },
     __self: undefined
   }, __jsx("div", {
     className: "btn-toolbar margintopbottom5 checkbox-bigger",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 81
     },
     __self: undefined
-  }, __jsx("div", {
+  }, context.showSpeakerSpeakingDays === false ? null : __jsx("div", {
     className: "hide",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 83
+    },
+    __self: undefined
+  }, __jsx("div", {
+    className: "form-check-inline",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 84
     },
     __self: undefined
   }, __jsx("label", {
     className: "form-check-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 85
     },
     __self: undefined
   }, __jsx("input", {
@@ -2723,21 +2745,21 @@ const Speakers = ({}) => {
     checked: speakingSaturday,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 86
     },
     __self: undefined
   }), "Saturday Speakers")), __jsx("div", {
     className: "form-check-inline",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
+      lineNumber: 95
     },
     __self: undefined
   }, __jsx("label", {
     className: "form-check-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 96
     },
     __self: undefined
   }, __jsx("input", {
@@ -2747,21 +2769,21 @@ const Speakers = ({}) => {
     checked: speakingSunday,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 97
     },
     __self: undefined
-  }), "Sunday Speakers")))), __jsx("div", {
+  }), "Sunday Speakers"))))), __jsx("div", {
     className: "row",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 110
     },
     __self: undefined
   }, __jsx("div", {
     className: "card-deck",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102
+      lineNumber: 111
     },
     __self: undefined
   }, speakerListFiltered.map(({
@@ -2781,7 +2803,7 @@ const Speakers = ({}) => {
       bio: bio,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 106
+        lineNumber: 115
       },
       __self: undefined
     });
@@ -2789,6 +2811,46 @@ const Speakers = ({}) => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Speakers);
+
+/***/ }),
+
+/***/ "./src/speakersReducer.js":
+/*!********************************!*\
+  !*** ./src/speakersReducer.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const speakersReducer = (state, action) => {
+  const updateFavorite = favoriteValue => {
+    return state.map((item, index) => {
+      if (item.id === action.sessionId) {
+        item.favorite = favoriteValue;
+        return item;
+      }
+
+      return item;
+    });
+  };
+
+  switch (action.type) {
+    case "setSpeakerList":
+      return action.data;
+
+    case "favorite":
+      return updateFavorite(true);
+
+    case "unfavorite":
+      return updateFavorite(false);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (speakersReducer);
 
 /***/ }),
 

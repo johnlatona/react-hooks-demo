@@ -13525,11 +13525,12 @@ var speakers = function speakers() {
 /*!********************!*\
   !*** ./src/App.js ***!
   \********************/
-/*! exports provided: default */
+/*! exports provided: ConfigContext, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigContext", function() { return ConfigContext; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ "./src/Home.js");
@@ -13539,40 +13540,53 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+var ConfigContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
 
 var pageToShow = function pageToShow(pageName) {
   if (pageName === 'Home') return __jsx(_Home__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 8
     },
     __self: this
   });
   if (pageName === 'Speakers') return __jsx(_Speakers__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 9
     },
     __self: this
   });
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8
+      lineNumber: 10
     },
     __self: this
   }, "Not Found");
 };
 
+var configValue = {
+  showSpeakerSpeakingDays: true,
+  showSignMeUp: true
+};
+
 var App = function App(_ref) {
   var pageName = _ref.pageName;
-  return __jsx("div", {
+  return __jsx(ConfigContext.Provider, {
+    value: configValue,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 20
     },
     __self: this
-  }, pageToShow(pageName));
+  }, __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21
+    },
+    __self: this
+  }, pageToShow(pageName)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -13969,10 +13983,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/esm/react-toastify.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./App */ "./src/App.js");
 
 
 var _jsxFileName = "/Users/u089981/Documents/react/react-hooks-demo/src/SignMeUp.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
+
 
 
 
@@ -13996,6 +14012,8 @@ var SignMeUp = function SignMeUp(_ref) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
       sendProcessing = _useState3[0],
       setSendProcessing = _useState3[1];
+
+  var context = Object(react__WEBPACK_IMPORTED_MODULE_2__["useContext"])(_App__WEBPACK_IMPORTED_MODULE_5__["ConfigContext"]);
 
   var validateEmail = function validateEmail(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -14022,30 +14040,30 @@ var SignMeUp = function SignMeUp(_ref) {
   };
 
   var buttonText = sendProcessing ? "processing..." : "Get Updates";
-  return __jsx("div", {
+  return context.showSignMeUp === false ? null : __jsx("div", {
     className: "container",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 45
     },
     __self: this
   }, __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 46
     },
     __self: this
   }, __jsx(react_toastify__WEBPACK_IMPORTED_MODULE_4__["ToastContainer"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 47
     },
     __self: this
   }), __jsx("div", {
     className: "content",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 48
     },
     __self: this
   }, __jsx("input", (_jsx = {
@@ -14060,7 +14078,7 @@ var SignMeUp = function SignMeUp(_ref) {
     required: true
   }, Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_jsx, "required", true), Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_jsx, "__source", {
     fileName: _jsxFileName,
-    lineNumber: 46
+    lineNumber: 49
   }), Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(_jsx, "__self", this), _jsx)), "\xA0", __jsx("button", {
     disabled: !emailValid || sendProcessing,
     className: "btn",
@@ -14068,7 +14086,7 @@ var SignMeUp = function SignMeUp(_ref) {
     type: "submit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 62
     },
     __self: this
   }, buttonText))));
@@ -14132,19 +14150,19 @@ var _jsxFileName = "/Users/u089981/Documents/react/react-hooks-demo/src/SpeakerD
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-
-var SpeakerDetail = function SpeakerDetail(_ref) {
+var SpeakerDetail = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
   var id = _ref.id,
       firstName = _ref.firstName,
       lastName = _ref.lastName,
       favorite = _ref.favorite,
       bio = _ref.bio,
       onHeartFavoriteHandler = _ref.onHeartFavoriteHandler;
+  console.log("SpeakerDetail:".concat(id, " ").concat(firstName, " ").concat(lastName, " ").concat(favorite));
   return __jsx("div", {
     className: "card col-4 cardmin",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 5
+      lineNumber: 6
     },
     __self: this
   }, __jsx(_ImageToggleOnScroll__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -14154,21 +14172,21 @@ var SpeakerDetail = function SpeakerDetail(_ref) {
     alt: "{firstName} {lastName}",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6
+      lineNumber: 7
     },
     __self: this
   }), __jsx("div", {
     className: "card-body",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12
+      lineNumber: 13
     },
     __self: this
   }, __jsx("h4", {
     className: "card-title",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
     },
     __self: this
   }, __jsx("button", {
@@ -14179,24 +14197,23 @@ var SpeakerDetail = function SpeakerDetail(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 15
     },
     __self: this
   }), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 22
     },
     __self: this
   }, firstName, " ", lastName)), __jsx("span", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 26
     },
     __self: this
   }, bio)));
-};
-
+});
 /* harmony default export */ __webpack_exports__["default"] = (SpeakerDetail);
 
 /***/ }),
@@ -14225,11 +14242,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_Menu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../src/Menu */ "./src/Menu.js");
 /* harmony import */ var _SpeakerData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SpeakerData */ "./src/SpeakerData.js");
 /* harmony import */ var _SpeakerDetail__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SpeakerDetail */ "./src/SpeakerDetail.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./App */ "./src/App.js");
+/* harmony import */ var _speakersReducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./speakersReducer */ "./src/speakersReducer.js");
 
 
 
 var _jsxFileName = "/Users/u089981/Documents/react/react-hooks-demo/src/Speakers.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
+
+
 
 
 
@@ -14247,16 +14268,18 @@ var Speakers = function Speakers(_ref) {
 
   var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       speakingSunday = _useState2[0],
-      setSpeakingSunday = _useState2[1];
+      setSpeakingSunday = _useState2[1]; // const [speakerList, setSpeakerList] = useState([]);
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])([]),
-      speakerList = _useState3[0],
-      setSpeakerList = _useState3[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
-      isLoading = _useState4[0],
-      setIsLoading = _useState4[1];
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_3__["useReducer"])(_speakersReducer__WEBPACK_IMPORTED_MODULE_11__["default"], []),
+      speakerList = _useReducer[0],
+      dispatch = _useReducer[1];
 
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
+      isLoading = _useState3[0],
+      setIsLoading = _useState3[1];
+
+  var context = Object(react__WEBPACK_IMPORTED_MODULE_3__["useContext"])(_App__WEBPACK_IMPORTED_MODULE_10__["ConfigContext"]);
   Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     setIsLoading(true);
     new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_1___default.a(function (resolve) {
@@ -14270,27 +14293,27 @@ var Speakers = function Speakers(_ref) {
             sun = _ref2.sun;
         return speakingSaturday && sat || speakingSunday && sun;
       });
-      setSpeakerList(speakerListServerFilter);
+      dispatch({
+        type: "setSpeakerList",
+        data: speakerListServerFilter
+      });
     });
     return function () {
       console.log("clean up");
     };
   }, []);
-  var speakerListFiltered = isLoading ? [] : speakerList.filter(function (_ref3) {
-    var sat = _ref3.sat,
-        sun = _ref3.sun;
-    return speakingSaturday && sat || speakingSunday && sun;
-  }).sort(function (a, b) {
-    if (a.firstName < b.firstName) {
-      return -1;
-    }
-
-    if (a.firstName > b.firstName) {
-      return 1;
-    }
-
-    return 0;
-  });
+  var newSpeakerList = Object(react__WEBPACK_IMPORTED_MODULE_3__["useMemo"])(function () {
+    return speakerList.filter(function (_ref3) {
+      var sat = _ref3.sat,
+          sun = _ref3.sun;
+      return speakingSaturday && sat || speakingSunday && sun;
+    }).sort(function (a, b) {
+      if (a.firstName < b.firstName) return -1;
+      if (a.firstName > b.firstName) return 1;
+      return 0;
+    });
+  }, [speakingSaturday, speakingSunday, speakerList]);
+  var speakerListFiltered = isLoading ? [] : newSpeakerList;
 
   var handleChangeSaturday = function handleChangeSaturday() {
     setSpeakingSaturday(!speakingSaturday);
@@ -14300,72 +14323,74 @@ var Speakers = function Speakers(_ref) {
     setSpeakingSunday(!speakingSunday);
   };
 
-  var heartFavoriteHandler = function heartFavoriteHandler(e, favoriteValue) {
+  var heartFavoriteHandler = Object(react__WEBPACK_IMPORTED_MODULE_3__["useCallback"])(function (e, favoriteValue) {
     e.preventDefault();
 
     var sessionId = _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(e.target.attributes["data-sessionid"].value);
 
-    setSpeakerList(speakerList.map(function (item) {
-      if (item.id === sessionId) {
-        item.favorite = favoriteValue;
-        return item;
-      }
-
-      return item;
-    }));
-  };
-
+    dispatch({
+      type: favoriteValue ? "favorite" : "unfavorite",
+      sessionId: sessionId
+    });
+  }, []);
   if (isLoading) return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 74
     },
     __self: this
   }, "Loading...");
   return __jsx("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 72
+      lineNumber: 77
     },
     __self: this
   }, __jsx(_src_Header__WEBPACK_IMPORTED_MODULE_6__["Header"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 78
     },
     __self: this
   }), __jsx(_src_Menu__WEBPACK_IMPORTED_MODULE_7__["Menu"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 79
     },
     __self: this
   }), __jsx("div", {
     className: "container",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 75
+      lineNumber: 80
     },
     __self: this
   }, __jsx("div", {
     className: "btn-toolbar margintopbottom5 checkbox-bigger",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 81
     },
     __self: this
-  }, __jsx("div", {
+  }, context.showSpeakerSpeakingDays === false ? null : __jsx("div", {
     className: "hide",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 83
+    },
+    __self: this
+  }, __jsx("div", {
+    className: "form-check-inline",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 84
     },
     __self: this
   }, __jsx("label", {
     className: "form-check-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 78
+      lineNumber: 85
     },
     __self: this
   }, __jsx("input", {
@@ -14375,21 +14400,21 @@ var Speakers = function Speakers(_ref) {
     checked: speakingSaturday,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 86
     },
     __self: this
   }), "Saturday Speakers")), __jsx("div", {
     className: "form-check-inline",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 88
+      lineNumber: 95
     },
     __self: this
   }, __jsx("label", {
     className: "form-check-label",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 96
     },
     __self: this
   }, __jsx("input", {
@@ -14399,21 +14424,21 @@ var Speakers = function Speakers(_ref) {
     checked: speakingSunday,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 97
     },
     __self: this
-  }), "Sunday Speakers")))), __jsx("div", {
+  }), "Sunday Speakers"))))), __jsx("div", {
     className: "row",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 101
+      lineNumber: 110
     },
     __self: this
   }, __jsx("div", {
     className: "card-deck",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102
+      lineNumber: 111
     },
     __self: this
   }, speakerListFiltered.map(function (_ref4) {
@@ -14432,7 +14457,7 @@ var Speakers = function Speakers(_ref) {
       bio: bio,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 106
+        lineNumber: 115
       },
       __self: this
     });
@@ -14440,6 +14465,46 @@ var Speakers = function Speakers(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Speakers);
+
+/***/ }),
+
+/***/ "./src/speakersReducer.js":
+/*!********************************!*\
+  !*** ./src/speakersReducer.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var speakersReducer = function speakersReducer(state, action) {
+  var updateFavorite = function updateFavorite(favoriteValue) {
+    return state.map(function (item, index) {
+      if (item.id === action.sessionId) {
+        item.favorite = favoriteValue;
+        return item;
+      }
+
+      return item;
+    });
+  };
+
+  switch (action.type) {
+    case "setSpeakerList":
+      return action.data;
+
+    case "favorite":
+      return updateFavorite(true);
+
+    case "unfavorite":
+      return updateFavorite(false);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (speakersReducer);
 
 /***/ }),
 
